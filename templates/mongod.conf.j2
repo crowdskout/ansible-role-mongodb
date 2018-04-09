@@ -36,15 +36,19 @@ storage:
   {% if mongodb_major_version | version_compare("3.0", ">=") -%}
   engine: {{ mongodb_storage_engine }}
   {% endif -%}
+  directoryPerDB: true
   journal:
     enabled: {{ mongodb_storage_journal_enabled | to_nice_json }}
-  {% if mongodb_storage_engine == 'mmapv1' -%}
-  mmapv1:
-    quota:
-      enforced: {{ mongodb_storage_quota_enforced | to_nice_json }}
-      maxFilesPerDB: {{ mongodb_storage_quota_maxfiles }}
-    smallFiles: {{ mongodb_storage_smallfiles | to_nice_json }}
-  {% endif %}
+    commitIntervalMs: {{ mongodb_commit_interval }}
+  wiredTiger:
+    collectionConfig:
+      blockCompressor: zlib
+    engineConfig:
+      journalCompressor: snappy #zlib implementation here has 30% performance hit on writes/reads
+{% if mongodb_cache_size != "" %}
+      cacheSizeGB: {{mongodb_cache_size}}
+{% endif %}
+
 
 systemLog:
   destination: {{ mongodb_systemlog_destination }}

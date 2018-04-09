@@ -1,0 +1,16 @@
+
+- name: mongo:tools | checkout wilder/mongodb-tools
+  git:
+    repo: git://github.com/jwilder/mongodb-tools
+    dest: /opt/mongodb-tools
+
+- name: mongo:tools | Install mongodb tools
+  shell: ./setup.sh
+  args:
+    chdir: /opt/mongodb-tools
+
+- name: mongo:tools | Install mongodb tools
+  shell: source virtualenv/bin/activate
+  args:
+    chdir: /opt/mongodb-tools
+

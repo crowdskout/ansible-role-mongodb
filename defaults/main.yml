@@ -99,3 +99,11 @@ mongodb_root_backup_password: passw0rd
 
 # setParameter config
 mongodb_set_parameters:
+
+mongodb_commit_interval: 100 #default
+
+mongodb_cache_size: ""
+
+mongodb_tools: True
+mongodb_server: True
+mongodb_client: False

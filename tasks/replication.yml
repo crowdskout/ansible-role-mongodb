@@ -1,5 +1,7 @@
 ---
 
+- debug: var=mongodb_replication_params
+
 - name: Replication configuration
   mongodb_replication:
     login_host: "{{ mongodb_login_host|default('localhost') }}"
@@ -29,3 +31,5 @@
   when: mongodb_security_authorization == 'disabled'
   with_items:
     - "{{ mongodb_replication_params|default([]) }}"
+
+
