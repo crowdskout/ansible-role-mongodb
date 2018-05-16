@@ -1,7 +1,4 @@
 
-- name: Include installation tasks
-  include_tasks: "install.{{ ansible_os_family | lower }}.yml"
-  tags: [mongodb]
 
 - name: Include configuration.yml
   import_tasks: configure.yml

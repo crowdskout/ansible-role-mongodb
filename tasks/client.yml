@@ -16,4 +16,4 @@
   with_items:
     - mongodb-org-shell
     - mongodb-org-tools
-  when: mongo_upgrade
+  when: mongodb_upgrade

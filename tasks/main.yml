@@ -7,6 +7,12 @@
     - "{{ ansible_distribution }}.yml"
     - "{{ ansible_os_family }}.yml"
 
+
+- name: Include installation tasks
+  include_tasks: "install.{{ ansible_os_family | lower }}.yml"
+  tags: [mongodb]
+
+
 - import_tasks: client.yml
   when: mongodb_client == True
   tags: "mongo:client"
@@ -16,8 +22,7 @@
   when: mongodb_tools == True
   tags: "mongo:tools"
 
+
 - import_tasks: server.yml
   when: mongodb_server == True
   tags: "mongo:server"
-
-
