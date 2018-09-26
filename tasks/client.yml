@@ -6,6 +6,8 @@
   with_items:
     - mongodb-org-shell
     - mongodb-org-tools
+  notify:
+    - reload systemd
 
 
 - name: Update mongo client
@@ -17,3 +19,5 @@
     - mongodb-org-shell
     - mongodb-org-tools
   when: mongodb_upgrade
+  notify:
+    - reload systemd

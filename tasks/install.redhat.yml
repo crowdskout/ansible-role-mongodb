@@ -24,6 +24,8 @@
   with_items:
     - "{{ mongodb_package }}"
     - numactl
+  notify:
+    - reload systemd
 
 - name: Install PyMongo package
   yum:

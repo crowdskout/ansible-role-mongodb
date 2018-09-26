@@ -33,7 +33,7 @@
       password: "{{ mongodb_user_admin_password }}",
       roles: "userAdminAnyDatabase"
       }
-  no_log: true
+#  no_log: true
 
 - name: create administrative user siteRootAdmin
   mongodb_user:
@@ -49,7 +49,7 @@
       password: "{{ mongodb_root_admin_password }}",
       roles: "root"
       }
-  no_log: true
+#  no_log: true
 
 - name: create backup user "backupuser"
   mongodb_user:
