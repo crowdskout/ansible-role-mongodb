@@ -14,8 +14,9 @@ MongoDB support matrix:
 | ------------ |:-------------:|:-----------:|:-----------:|:-----------:|
 | Ubuntu 14.04 | :no_entry: | :white_check_mark:| :white_check_mark:| :white_check_mark:|
 | Ubuntu 16.04 | :no_entry: | :white_check_mark:| :white_check_mark:| :white_check_mark:|
+| Ubuntu 18.04 | :no_entry: | :x:| :x:| :white_check_mark:|
 | Debian 8.x | :no_entry: | :white_check_mark:| :white_check_mark:| :white_check_mark:|
-| Debian 9.x | :no_entry: | :white_check_mark:| :x:| :x:|
+| Debian 9.x | :no_entry: | :white_check_mark:| :x:| :white_check_mark:|
 | RHEL 6.x | :no_entry: | :white_check_mark: | :white_check_mark: | :white_check_mark:|
 | RHEL 7.x | :no_entry: | :white_check_mark: | :white_check_mark: | :white_check_mark:|
 
@@ -38,6 +39,7 @@ mongodb_package: mongodb-org
 mongodb_version: "3.6"
 
 mongodb_pymongo_from_pip: true                   # Install latest PyMongo via PIP or package manager
+mongodb_pymongo_pip_version: 3.6.1               # Choose PyMong version to install from pip. If not set use latest
 mongodb_user_update_password: "on_create"        # MongoDB user password update default policy
 mongodb_manage_service: true
 
@@ -62,6 +64,8 @@ mongodb_security_keyfile: /etc/mongodb-keyfile   # Specify path to keyfile with 
 
 ## storage Options
 mongodb_storage_dbpath: /data/db                 # Directory for datafiles
+mongodb_storage_dirperdb: false                  # Use one directory per DB
+
 # The storage engine for the mongod database. Available values:
 # 'mmapv1', 'wiredTiger'
 mongodb_storage_engine: "{{ 'mmapv1' if mongodb_version[0:3] == '3.0' else 'wiredTiger' }}"
@@ -136,7 +140,7 @@ mongodb_root_admin_password: passw0rd
 
 #### Usage
 
-Add `greendayonfire.mongodb` to your roles and set vars in your playbook file.
+Add `undergreen.mongodb` to your roles and set vars in your playbook file.
 
 Example vars for authorization:
 ```yaml

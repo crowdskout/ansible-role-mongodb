@@ -9,6 +9,7 @@ mongodb_apt_key_id:
   "3.6": "2930ADAE8CAF5059EE73BB4B58712A2291FA4AD5"
 
 mongodb_pymongo_from_pip: true                   # Install latest PyMongo via PIP or package manager
+mongodb_pymongo_pip_version: 3.6.1
 
 mongodb_user_update_password: "on_create"        # MongoDB user password update default policy
 mongodb_manage_service: true
@@ -24,6 +25,9 @@ mongodb_net_http_enabled: false                  # Enable http interface
 mongodb_net_ipv6: false                          # Enable IPv6 support (disabled by default)
 mongodb_net_maxconns: 65536                      # Max number of simultaneous connections
 mongodb_net_port: 27017                          # Specify port number
+mongodb_net_ssl: disabled                        # Enable or disable ssl connections
+mongodb_net_ssl_mode:                            # Set the ssl mode (RequireSSL / PreferSSL / AllowSSL / disabled)
+mongodb_net_ssl_pemfile:                         # Location of the pemfile to use for ssl
 
 ## processManagement Options
 # Fork server process
@@ -37,6 +41,8 @@ mongodb_security_keyfile: /etc/mongodb-keyfile   # Specify path to keyfile with 
 
 ## storage Options
 mongodb_storage_dbpath: /data/db                 # Directory for datafiles
+mongodb_storage_dirperdb: false                  # Use one directory per DB
+
 # The storage engine for the mongod database. Available values:
 # 'mmapv1', 'wiredTiger'
 mongodb_storage_engine: "wiredTiger"
