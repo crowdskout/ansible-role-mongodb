@@ -10,11 +10,18 @@
   when: mongodb_replication_replset and  mongodb_replication_replset != ''
 
 - name: set mongodb gid
-  group: name=mongodb gid={{ mongodb_gid }} state=present
+  group:
+    name: mongodb
+    gid: "{{ mongodb_gid }}"
+    state: present
   when: mongodb_gid
 
 - name: set mongodb uid
-  user: name=mongodb uid={{ mongodb_uid }} group=mongodb state=present
+  user:
+    name: mongodb
+    uid: "{{ mongodb_uid }}"
+    group: mongodb
+    state: present
   when: mongodb_uid
 
 - name: reset mongodb folder and subfolders with new uid

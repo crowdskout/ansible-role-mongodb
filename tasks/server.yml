@@ -15,7 +15,9 @@
 - name: Include replication configuration
   import_tasks: replication.yml
   when: mongodb_replication_replset and mongodb_replication_replset != ''
-  tags: [mongodb]
+  tags:
+    - mongodb
+    - mongodb:repl
 
 - name: Check where admin user already exists
   command: >
@@ -29,7 +31,8 @@
           and (not mongodb_replication_replset
           or mongodb_replication_replset == '') )
   no_log: true
-  tags: [mongodb]
+  tags:
+    - mongodb
 
 - name: Include authorization configuration
   import_tasks: auth_initialization.yml
@@ -57,7 +60,9 @@
         and mongodb_security_authorization == 'enabled'
         and mongodb_master is defined and mongodb_master )
 #  no_log: true
-  tags: [mongodb]
+  tags:
+    - mongodb
+    - mongodb:repl
 
 - name: create normal users without replicaset
   mongodb_user_fixed:
