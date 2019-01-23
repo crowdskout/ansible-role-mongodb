@@ -39,15 +39,13 @@ security:
 storage:
   dbPath: {{ mongodb_storage_dbpath }}
   directoryPerDB: {{ mongodb_storage_dirperdb | to_nice_json }}
-  {% if mongodb_major_version | version_compare("3.0", ">=") -%}
   engine: {{ mongodb_storage_engine }}
-  {% endif -%}
   journal:
     enabled: {{ mongodb_storage_journal_enabled | to_nice_json }}
     commitIntervalMs: {{ mongodb_commit_interval }}
   wiredTiger:
     collectionConfig:
-      blockCompressor: zlib
+      blockCompressor: {{mongodb_collection_compressor}}
     engineConfig:
       journalCompressor: snappy #zlib implementation here has 30% performance hit on writes/reads
 {% if mongodb_cache_size != "" %}

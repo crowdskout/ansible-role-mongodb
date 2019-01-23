@@ -113,3 +113,7 @@ mongodb_cache_size: ""
 mongodb_tools: True
 mongodb_server: True
 mongodb_client: False
+
+
+# zlib/snappy
+mongodb_collection_compressor: snappy
