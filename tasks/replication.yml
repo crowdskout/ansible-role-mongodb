@@ -2,6 +2,8 @@
 
 - debug: var=mongodb_replication_params
 
+
+ #can be dangerous and break running mongo replica sets
 - name: Replication configuration
   mongodb_replication:
     login_host: "{{ mongodb_login_host|default('localhost') }}"

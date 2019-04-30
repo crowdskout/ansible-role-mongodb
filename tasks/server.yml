@@ -2,7 +2,9 @@
 
 - name: Include configuration.yml
   import_tasks: configure.yml
-  tags: [mongodb]
+  tags:
+    - mongodb
+    - mongodb:config
 
 - name: Include replication and auth configuration
   import_tasks: replication_init_auth.yml
@@ -89,6 +91,15 @@
 
 
 - name: Set lower tcp keepalive per docs
-  sysctl: name="net.ipv4.tcp_keepalive_time" value=120 sysctl_set=yes state=present reload=yes
+  sysctl:
+    name: "{{item.key}}"
+    value: "{{item.value}}"
+    state: present
+    reload: yes
+    sysctl_set: yes
+  with_dict: "{{ mongodb_sysctl_params }}"
+  tags:
+    - mongodb:sysctl
+    - mongodb:config
 
 
